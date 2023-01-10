@@ -5,17 +5,19 @@
 
 const express = require('express');
 const { Client } = require('pg');
+require('dotenv').config()
+
 // declarations
 const app = express();
 const port = 8000;
-const client = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'tickets',
-    password: 'postgresjoh',
-    port: 5432,
-});
 
+const client = new Client({
+    user: process.env.DB_USERNAME,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME, 
+    password: process.env.DB_PASSWORD,
+    port: DB_PORT,
+});
 
 client.connect();
 
@@ -41,12 +43,12 @@ app.use(function (req, res, next) {
 
 // ROUTES -----------------------
 
-
 // Récupération des Users
-app.get('/api/users', async (req, res) => {
+app.get('/api/users', async (req , res) => {
     
     try {
         const data = await client.query('SELECT id, username FROM users');
+        res.status
         res.status(200).json({
             status: "SUCCESS",
             message: `Récupération de ${data.rowCount} utilisateurs`,
