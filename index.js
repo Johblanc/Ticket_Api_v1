@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
 // ROUTES -----------------------
 
 
-// Recupération des Users
+// Récupération des Users
 app.get('/api/users', async (req, res) => {
     
     try {
